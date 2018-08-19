@@ -24,7 +24,7 @@ class CreateTransaksiTable extends Migration
             $table->date('tgl_kembali')->nullable();
             $table->enum('status', ['Pinjam', 'Kembali'])->default('Pinjam');
             $table->integer('operator')->unsigned();
-            $table->foreign('operator')->references('id')->('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('operator')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

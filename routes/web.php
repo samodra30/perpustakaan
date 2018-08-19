@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,42 +10,44 @@
 |
 */
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Anggota
-Route::get('/anggota', 'AnggotaController@index');
-Route::get('/anggota/create', 'AnggotaController@create');
-Route::post('/anggota/store', 'AnggotaController@store');
-Route::get('/anggota/view/{id}', 'AnggotaController@show');
-Route::get('/anggota/edit/{id}', 'AnggotaController@edit');
-Route::post('/anggota/update/{id}', 'AnggotaController@update');
-Route::delete('/anggota/hapus/{id}', 'AnggotaController@destroy');
+Route::group(['middleware' => ['admin']], function() {
+	// Anggota
+  Route::get('/anggota', 'AnggotaController@index');
+	Route::get('/anggota/create', 'AnggotaController@create');
+	Route::post('/anggota/store', 'AnggotaController@store');
+	Route::get('/anggota/view/{id}', 'AnggotaController@show');
+	Route::get('/anggota/edit/{id}', 'AnggotaController@edit');
+	Route::post('/anggota/update/{id}', 'AnggotaController@update');
+	Route::delete('/anggota/hapus/{id}', 'AnggotaController@destroy');
 
-// Buku
-Route::get('/buku', 'BukuController@index');
-Route::get('/buku/create', 'BukuController@create');
-Route::post('/buku/store', 'BukuController@store');
-Route::get('/buku/view/{id}', 'BukuController@show');
-Route::get('/buku/edit/{id}', 'BukuController@edit');
-Route::post('/buku/update/{id}', 'BukuController@update');
-Route::delete('/buku/hapus/{id}', 'BukuController@destroy');
+	// Buku
+	Route::get('/buku', 'BukuController@index')->middleware('admin');
+	Route::get('/buku/create', 'BukuController@create');
+	Route::post('/buku/store', 'BukuController@store');
+	Route::get('/buku/view/{id}', 'BukuController@show');
+	Route::get('/buku/edit/{id}', 'BukuController@edit');
+	Route::post('/buku/update/{id}', 'BukuController@update');
+	Route::delete('/buku/hapus/{id}', 'BukuController@destroy');
 
-// Kas
-Route::get('/kas', 'KasController@index');
-Route::get('/kas/pemasukan', 'KasController@pemasukan');
-Route::get('/kas/pengeluaran', 'KasController@pengeluaran');
-Route::post('/kas/kasmasuk', 'KasController@kasmasuk');
-Route::post('/kas/kaskeluar', 'KasController@kaskeluar');
-Route::get('/kas/view/{id}', 'KasController@show');
-Route::get('/kas/edit/{id}', 'KasController@edit');
-Route::post('/kas/update/{id}', 'KasController@update');
-Route::delete('/kas/hapus/{id}', 'KasController@destroy');
-
+	// Kas
+	Route::get('/kas', 'KasController@index');
+	Route::get('/kas/pemasukan', 'KasController@pemasukan');
+	Route::get('/kas/pengeluaran', 'KasController@pengeluaran');
+	Route::post('/kas/kasmasuk', 'KasController@kasmasuk');
+	Route::post('/kas/kaskeluar', 'KasController@kaskeluar');
+	Route::get('/kas/view/{id}', 'KasController@show');
+	Route::get('/kas/edit/{id}', 'KasController@edit');
+	Route::post('/kas/update/{id}', 'KasController@update');
+	Route::delete('/kas/hapus/{id}', 'KasController@destroy');
+});
+    
 // Transaksi
 Route::get('/peminjaman', 'TransaksiController@peminjaman');
 Route::post('/peminjaman/pinjam', 'TransaksiController@store');

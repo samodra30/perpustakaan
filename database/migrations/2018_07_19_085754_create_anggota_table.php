@@ -26,7 +26,7 @@ class CreateAnggotaTable extends Migration
             $table->integer('rating_buku')->default('0');
             $table->timestamps();
         });
-        DB::statement("ALTER TABLE books AUTO_INCREMENT = 11111;");
+        DB::statement("ALTER TABLE anggota AUTO_INCREMENT = 11111;");
     }
 
     /**

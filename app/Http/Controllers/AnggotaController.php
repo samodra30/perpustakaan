@@ -4,6 +4,7 @@ namespace Perpustakaan\Http\Controllers;
 
 use Perpustakaan\Anggota;
 use Illuminate\Http\Request;
+use Illuminate\Http\Auth;
 use Validator;
 
 class AnggotaController extends Controller

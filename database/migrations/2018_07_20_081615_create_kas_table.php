@@ -20,7 +20,7 @@ class CreateKasTable extends Migration
             $table->integer('pengeluaran');
             $table->text('keterangan');
             $table->integer('operator')->unsigned();
-            $table->foreign('operator')->references('id')->('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('operator')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
